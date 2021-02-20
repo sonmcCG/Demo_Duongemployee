@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head"></head>
+<body>
+<h3>Add Employee</h3>
+<p>
+    <a th:href="@{/employees/create}">
+        Back to employee list
+    </a>
+</p>
+<div class="container" id="form">
+    <form th:action="@{/employees/create}" th:object="${employee}"
+          method="POST" novalidate="novalidate">
+        <input type="hidden" th:field="*{id}"/>
+        <div>
+            <label>Name</label>
+            <input class="form-control" type="text" th:field="*{name}"/>
+        </div>
+        <div>
+            <label>Age</label>
+            <input class="form-control" type="email" th:field="*{age}"/>
+        </div>
+        <div>
+            <label>Address</label>
+            <input class="form-control" type="text" th:field="*{salary}"/>
+        </div>
+        <div>
+            <label>Branch</label>
+            <select th:field="*{branch}" class="form-control">
+                <option th:selected="${branch.getId()==1}" th:each="branch : ${branches}" th:value="${branch.getId()}"
+                        th:text="${branch.getName()}"></option>
+            </select>
+        </div>
+        <div>
+            <button class="btn btn-success" type="submit">Save</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

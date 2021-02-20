@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<div class="container">
+    <h3>Employees</h3>
+    <p>
+        <a th:href="@{/employees/create}">
+            Add new employee
+        </a>
+    </p>
+
+    <table class="table table-hover table-bordered" id="employees">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Salary</th>
+            <th>Branch</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="row : ${employees}">
+            <td th:text="${row.getId()}"></td>
+            <td th:text="${row.getName()}"><a th:href="@{/employee/{id}/view(id=${row.getId()})}"></a></td>
+            <td th:text="${row.getAge()}"></td>
+            <td th:text="${row.getSalary()}"></td>
+            <td th:text="${row.getBranch().getName()}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{/employee/{id}/edit(id=${row.getId()})}">update</a>
+                <a class="btn btn-danger" th:href="@{/employee/{id}/delete(id=${row.getId()})}">delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
